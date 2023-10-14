@@ -12,11 +12,13 @@ class TestHomePage(unittest.TestCase):
         self.driver = webdriver.Firefox()
         self.driver.maximize_window()
         self.driver.implicitly_wait(10)
-        self.loginPage = loginPage(self.driver)        
+        self.loginPage = loginPage(self.driver)  
+        self.homePage = homePage(self.driver)       
         
     def test_login_positive(self):
         self.loginPage.login("frontend_qa+dev-company@shipwell.com", "QA_password@123")
         time.sleep(10)
+        self.assertTrue(self.driver.find_element(By.XPATH, self.homePage.logoLocator).is_displayed())
              
     def tearDown(self):
         print("Cleanup of test environment")
